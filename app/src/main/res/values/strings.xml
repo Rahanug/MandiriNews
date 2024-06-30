@@ -8,4 +8,9 @@
     <string name="bottom_favorite">Favorite</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tv_headline_head">Editor Choice</string>
+    <string name="tv_headline_title">Title</string>
+    <string name="tv_headline_source">reuters</string>
+    <string name="tv_headline_time">10h</string>
+    <string name="tv_news_title">Latest News</string>
 </resources>
