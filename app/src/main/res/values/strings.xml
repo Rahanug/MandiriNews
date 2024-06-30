@@ -13,4 +13,7 @@
     <string name="tv_headline_source">reuters</string>
     <string name="tv_headline_time">10h</string>
     <string name="tv_news_title">Latest News</string>
+    <string name="retry">retry</string>
+    <string name="open_in_web">Open in Web</string>
+    <string name="bookmark">Bookmark</string>
 </resources>

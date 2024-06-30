@@ -4,9 +4,6 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.mandirinews.network.config.ApiService
 import com.example.mandirinews.network.response.ArticlesItem
-import java.util.Timer
-import kotlin.concurrent.schedule
-import kotlin.concurrent.thread
 
 class NewsPagingSource(
     private val apiService: ApiService
@@ -14,8 +11,12 @@ class NewsPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ArticlesItem> {
         return try {
             val page = params.key ?: 1
-            val response = apiService.getEverything(apiKey = "b664802b1a9b4c7bb9d655ae4d586376", page = page, size = params.loadSize)
-            val articles = response.articles ?: emptyList()
+            val response = apiService.getEverything(
+                apiKey = "f4eb3fcc3d9a4808a9f335bfc41dfeea",
+                page = page,
+                size = params.loadSize
+            )
+            val articles = response.articles
             LoadResult.Page(
                 data = articles,
                 prevKey = if (page == 1) null else page - 1,

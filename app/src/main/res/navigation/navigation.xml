@@ -10,9 +10,9 @@
         android:name="com.example.mandirinews.ui.view.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home">
-<!--        <action-->
-<!--            android:id="@+id/action_homeFragment_to_detailFragment"-->
-<!--            app:destination="@id/detailFragment" />-->
+        <action
+            android:id="@+id/action_homeFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
@@ -24,8 +24,20 @@
         android:name="com.example.mandirinews.ui.view.DetailNewsFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail_news">
-<!--        <argument-->
-<!--            android:name="articles_item"-->
-<!--            app:argType="com.example.mandirinews.network.response.ArticlesItem"/>-->
+        <argument
+            android:name="articles_item"
+            app:argType="com.example.mandirinews.network.response.ArticlesItem" />
+        <action
+            android:id="@+id/action_detailFragment_to_webview_fragment"
+            app:destination="@id/webview_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/webview_fragment"
+        android:name="com.example.mandirinews.ui.view.WebViewFragment"
+        android:label="fragment_webview"
+        tools:layout="@layout/fragment_web_view">
+        <argument
+            android:name="articles_item"
+            app:argType="string" />
     </fragment>
 </navigation>

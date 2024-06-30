@@ -8,14 +8,14 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
-import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.mandirinews.databinding.FragmentHomeBinding
 import com.example.mandirinews.di.Injection
 import com.example.mandirinews.network.config.ApiResponse
-import com.example.mandirinews.network.response.ArticlesItem
+import com.example.mandirinews.ui.adapter.LoadingStateAdapter
 import com.example.mandirinews.ui.adapter.NewsAdapter
 import com.example.mandirinews.ui.viewmodel.HomeViewModel
 import com.example.mandirinews.utils.getElapsedTime
@@ -36,13 +36,23 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding?.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val newsProvideRepository = Injection.provideRepository()
         val factory = HomeViewModel.HomeViewModelFactory(newsProvideRepository)
         homeViewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
-        newsAdapter = NewsAdapter()
+//        NewsAdapter
+        newsAdapter = NewsAdapter { article ->
+            val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(article)
+            findNavController().navigate(action)
+        }
         binding?.rvNewsList?.layoutManager = LinearLayoutManager(requireContext())
+        binding?.rvNewsList?.adapter = newsAdapter.withLoadStateFooter(
+            footer = LoadingStateAdapter {
+                newsAdapter.retry()
+            }
+        )
         binding?.rvNewsList?.adapter = newsAdapter
         lifecycleScope.launch {
             homeViewModel.newsFlow.collectLatest { pagingData ->
@@ -51,18 +61,15 @@ class HomeFragment : Fragment() {
         }
         newsAdapter.addLoadStateListener { loadState ->
             binding?.apply {
-                // show a retry button outside the list when refresh hits an error
-                shimmerNewsList.isVisible = loadState.refresh !is LoadState.Error
-
-                // swipeRefreshLayout displays whether refresh is occurring
-                shimmerNewsList.isVisible = loadState.refresh is LoadState.Loading
-
-                // show an empty state over the list when loading initially, before items are loaded
-                shimmerNewsList.isVisible = loadState.refresh is LoadState.Loading && newsAdapter.itemCount == 0
+//                shimmerNewsList.isVisible = loadState.refresh !is LoadState.Error
+//                shimmerNewsList.isVisible = loadState.refresh is LoadState.Loading
+                shimmerNewsList.isVisible =
+                    loadState.refresh is LoadState.Loading && newsAdapter.itemCount == 0
             }
         }
+//        NewsAdapter
         homeViewModel.topHeadline.observe(viewLifecycleOwner) { result ->
-            when(result){
+            when (result) {
                 is ApiResponse.Success -> {
                     binding?.apply {
                         shimmerHeadline.stopShimmer()
@@ -75,14 +82,25 @@ class HomeFragment : Fragment() {
                                 .load(result.data?.urlToImage)
                                 .into(it)
                         }
+                        ivHeadlinePhoto.setOnClickListener {
+                            result.data?.let { article ->
+                                val action =
+                                    HomeFragmentDirections.actionHomeFragmentToDetailFragment(
+                                        article
+                                    )
+                                findNavController().navigate(action)
+                            }
+                        }
                     }
                 }
+
                 is ApiResponse.Error -> {
                     binding?.apply {
                         shimmerHeadline.stopShimmer()
                         shimmerHeadline.isVisible = false
                     }
                 }
+
                 is ApiResponse.Empty -> {
                     binding?.apply {
                         shimmerHeadline.startShimmer()

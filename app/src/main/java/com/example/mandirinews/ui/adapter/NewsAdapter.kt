@@ -12,7 +12,8 @@ import com.example.mandirinews.R
 import com.example.mandirinews.network.response.ArticlesItem
 import com.example.mandirinews.utils.getElapsedTime
 
-class NewsAdapter : PagingDataAdapter<ArticlesItem, NewsAdapter.NewsViewHolder>(NewsDiffCallback()) {
+class NewsAdapter(private val onItemClicked: (ArticlesItem) -> Unit) :
+    PagingDataAdapter<ArticlesItem, NewsAdapter.NewsViewHolder>(NewsDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_news, parent, false)
@@ -22,6 +23,9 @@ class NewsAdapter : PagingDataAdapter<ArticlesItem, NewsAdapter.NewsViewHolder>(
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         val article = getItem(position)
         holder.bind(article)
+        holder.itemView.setOnClickListener {
+            article?.let { onItemClicked(it) }
+        }
     }
 
     class NewsViewHolder(view: View) : RecyclerView.ViewHolder(view) {

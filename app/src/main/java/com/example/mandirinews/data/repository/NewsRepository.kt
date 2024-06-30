@@ -1,6 +1,5 @@
 package com.example.mandirinews.data.repository
 
-import androidx.lifecycle.LiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
@@ -8,7 +7,9 @@ import com.example.mandirinews.data.paging.NewsPagingSource
 import com.example.mandirinews.network.config.ApiResponse
 import com.example.mandirinews.network.config.ApiService
 import com.example.mandirinews.network.response.ArticlesItem
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 
 class NewsRepository(private val apiService: ApiService) {
     fun getEverything(): Flow<PagingData<ArticlesItem>> {
@@ -18,7 +19,7 @@ class NewsRepository(private val apiService: ApiService) {
                 enablePlaceholders = false
             ),
             pagingSourceFactory = { NewsPagingSource(apiService) }
-        ).flow
+        ).flow.flowOn(Dispatchers.IO)
     }
 
     suspend fun getTopHeadline(): ApiResponse<ArticlesItem?> {
@@ -44,7 +45,5 @@ class NewsRepository(private val apiService: ApiService) {
             instance ?: synchronized(this) {
                 instance ?: NewsRepository(apiService)
             }.also { instance = it }
-
-        private val TAG = "NewsRepository"
     }
 }
