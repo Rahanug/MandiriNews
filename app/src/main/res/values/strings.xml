@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">MandiriNews</string>
+    <string name="item_news_title">Plastic Straws</string>
+    <string name="item_news_description">Plastic straws are bad for health</string>
+    <string name="item_news_publishedAt">10.00 PM</string>
+    <string name="item_news_source">Reuters</string>
+    <string name="bottom_home">Home</string>
+    <string name="bottom_favorite">Favorite</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
