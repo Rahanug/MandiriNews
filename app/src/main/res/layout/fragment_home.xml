@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.view.HomeFragment">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -16,91 +18,191 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:title="Mandiri News"
+            app:titleTextAppearance="@style/ToolbarTitleTextAppearance"
             app:titleCentered="true" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            android:layout_marginVertical="4dp"
+            android:layout_marginHorizontal="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_margin="16dp">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
 
             <TextView
                 android:id="@+id/tv_headline_editor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/tv_headline_head"
                 android:fontFamily="@font/newsreader_regular"
+                android:text="@string/tv_headline_head"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_headline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_headline_editor">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/shimmer_iv_headline_photo"
+                        android:layout_width="match_parent"
+                        android:layout_height="210dp"
+                        android:layout_marginTop="8dp"
+                        android:background="#DEDEDE"
+                        android:scaleType="fitXY"
+                        app:circularflow_radiusInDP="16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:shapeAppearanceOverlay="@style/roundimageview" />
+
+                    <TextView
+                        android:id="@+id/shimmer_tv_headline_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="#DEDEDE"
+                        android:fontFamily="@font/newsreader_regular"
+                        android:textSize="21sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/shimmer_iv_headline_photo" />
+
+                    <TextView
+                        android:id="@+id/shimmer_tv_headline_source"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="#DEDEDE"
+                        android:fontFamily="@font/newsreader_regular"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/shimmer_tv_headline_title" />
+
+                    <TextView
+                        android:id="@+id/shimmer_tv_headline_time"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="#DEDEDE"
+                        android:fontFamily="@font/newsreader_regular"
+                        app:layout_constraintEnd_toStartOf="@+id/shimmer_tv_headline_source"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/shimmer_tv_headline_title" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/iv_headline_photo"
                 android:layout_width="match_parent"
                 android:layout_height="210dp"
-                android:scaleType="fitXY"
                 android:layout_marginTop="8dp"
+                android:scaleType="fitXY"
                 app:circularflow_radiusInDP="16dp"
-                app:layout_constraintTop_toBottomOf="@id/tv_headline_editor"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_headline_editor"
                 app:shapeAppearanceOverlay="@style/roundimageview"
-                tools:src="@tools:sample/backgrounds/scenic"
-                />
+                tools:src="@tools:sample/backgrounds/scenic" />
+
             <TextView
                 android:id="@+id/tv_headline_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:textStyle="bold"
-                android:text="@string/tv_headline_title"
                 android:fontFamily="@font/newsreader_regular"
                 android:textSize="21sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/iv_headline_photo"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                android:lineSpacingExtra="8sp"
+                tools:text="@string/tv_headline_title" />
+
             <TextView
                 android:id="@+id/tv_headline_source"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tv_headline_source"
-                android:fontFamily="@font/newsreader_regular"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/newsreader_regular"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_headline_title"/>
+                app:layout_constraintTop_toBottomOf="@id/tv_headline_title"
+                tools:text="@string/tv_headline_source" />
+
             <TextView
                 android:id="@+id/tv_headline_time"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/newsreader_regular"
-                android:text="@string/tv_headline_time"
+                app:layout_constraintEnd_toStartOf="@id/tv_headline_source"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_headline_title"
-                app:layout_constraintEnd_toStartOf="@id/tv_headline_source"/>
+                tools:text="@string/tv_headline_time" />
+
             <TextView
                 android:id="@+id/tv_news_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/tv_news_title"
-                android:textStyle="bold"
-                android:textSize="18sp"
                 android:fontFamily="@font/newsreader_regular"
-                app:layout_constraintTop_toBottomOf="@id/tv_headline_time"
+                android:text="@string/tv_news_title"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/tv_headline_time" />
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_news_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_news_title">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/shimmer_item_news" />
+
+                    <include layout="@layout/shimmer_item_news" />
+
+                    <include layout="@layout/shimmer_item_news" />
+
+                    <include layout="@layout/shimmer_item_news" />
+                </LinearLayout>
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_news_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/tv_news_title"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_news_title" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

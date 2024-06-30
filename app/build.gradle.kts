@@ -62,4 +62,5 @@ dependencies {
 //    kapt("androidx.room:room-compiler:2.6.1")
     implementation("androidx.paging:paging-runtime-ktx:3.3.0")
     implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation("com.facebook.shimmer:shimmer:0.5.0")
 }

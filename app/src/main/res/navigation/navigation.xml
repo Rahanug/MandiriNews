@@ -9,10 +9,23 @@
         android:id="@+id/homeFragment"
         android:name="com.example.mandirinews.ui.view.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_home">
+<!--        <action-->
+<!--            android:id="@+id/action_homeFragment_to_detailFragment"-->
+<!--            app:destination="@id/detailFragment" />-->
+    </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.example.mandirinews.ui.view.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite"/>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.mandirinews.ui.view.DetailNewsFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail_news">
+<!--        <argument-->
+<!--            android:name="articles_item"-->
+<!--            app:argType="com.example.mandirinews.network.response.ArticlesItem"/>-->
+    </fragment>
 </navigation>

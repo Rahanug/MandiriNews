@@ -5,24 +5,24 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     card_view:cardElevation="0dp"
-    android:layout_marginBottom="16dp"
+    android:layout_marginBottom="8dp"
     android:backgroundTint="@color/md_theme_background"
-    android:layout_height="110dp">
+    android:layout_height="100dp">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/iv_item_photo"
+            android:id="@+id/shimmer_iv_item_photo"
             android:layout_width="80dp"
             android:layout_height="60dp"
             android:scaleType="centerCrop"
             android:layout_marginBottom="8dp"
             android:layout_marginStart="8dp"
             card_view:shapeAppearanceOverlay="@style/roundimageview"
+            android:background="#DEDEDE"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintTop_toTopOf="parent"
-            card_view:layout_constraintBottom_toTopOf="@id/tv_item_source"
-            tools:src="@tools:sample/avatars" />
+            card_view:layout_constraintBottom_toTopOf="@id/tv_item_source" />
 
         <TextView
             android:id="@+id/tv_item_name"
@@ -35,37 +35,36 @@
             android:ellipsize="end"
             android:gravity="start"
             android:maxLines="3"
-            android:lineSpacingExtra="4sp"
             card_view:layout_constraintTop_toTopOf="parent"
-            card_view:layout_constraintEnd_toStartOf="@+id/iv_item_photo"
+            card_view:layout_constraintEnd_toStartOf="@+id/shimmer_iv_item_photo"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintBottom_toTopOf="@id/tv_item_publishedAt"
-            tools:text="@string/item_news_title" />
+            android:background="#DEDEDE" />
 
         <TextView
             android:id="@+id/tv_item_publishedAt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:layout_marginVertical="12dp"
+            android:layout_marginVertical="8dp"
             android:textSize="12sp"
             android:fontFamily="@font/newsreader_regular"
             card_view:layout_constraintBottom_toBottomOf="@id/divider"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintEnd_toStartOf="@id/tv_item_source"
-            tools:text="@string/item_news_publishedAt" />
+            android:background="#DEDEDE" />
         <TextView
             android:id="@+id/tv_item_source"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="12dp"
-            android:layout_toEndOf="@id/iv_item_photo"
+            android:layout_marginVertical="8dp"
+            android:layout_toEndOf="@id/shimmer_iv_item_photo"
             android:textSize="12sp"
             android:fontFamily="@font/newsreader_regular"
             android:textAlignment="viewEnd"
             card_view:layout_constraintBottom_toBottomOf="@id/divider"
             card_view:layout_constraintEnd_toEndOf="parent"
-            tools:text="@string/item_news_source" />
+            android:background="#DEDEDE" />
         <com.google.android.material.divider.MaterialDivider
             android:id="@+id/divider"
             android:layout_width="match_parent"
