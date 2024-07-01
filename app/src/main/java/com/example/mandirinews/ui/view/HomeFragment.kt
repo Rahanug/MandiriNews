@@ -39,10 +39,9 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val newsProvideRepository = Injection.provideRepository()
-        val factory = HomeViewModel.HomeViewModelFactory(newsProvideRepository)
+        val newsProvideRepository = Injection.provideRepository(requireContext())
+        val factory = newsProvideRepository.let { HomeViewModel.HomeViewModelFactory(it) }
         homeViewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
-//        NewsAdapter
         newsAdapter = NewsAdapter { article ->
             val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(article)
             findNavController().navigate(action)

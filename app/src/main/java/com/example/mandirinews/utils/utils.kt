@@ -1,11 +1,9 @@
 package com.example.mandirinews.utils
 
-import android.os.Build
-import androidx.annotation.RequiresApi
+import com.example.mandirinews.data.model.News
+import com.example.mandirinews.network.response.ArticlesItem
+import com.example.mandirinews.network.response.Source
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.time.temporal.ChronoUnit
 import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
@@ -31,4 +29,17 @@ fun getElapsedTime(publishedAt: String): String {
         hours > 0 -> "$hours hours ago"
         else -> "$minutes minutes ago"
     }
+}
+
+fun News.toArticlesItem(): ArticlesItem {
+    return ArticlesItem(
+        source = Source(name = this.sourceName),
+        author = this.author,
+        title = this.title,
+        description = this.description,
+        url = this.url,
+        urlToImage = this.urlToImage,
+        publishedAt = this.publishedAt,
+        content = this.content
+    )
 }
